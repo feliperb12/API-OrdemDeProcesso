@@ -8,17 +8,22 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-import java.util.Arrays;
-
 @Configuration
-@Profile("test")
-public class TestConfig {
+@Profile("dev")
+public class DevConfig {
 
     @Autowired
     private DBService dbService;
 
+   /* @Value("${spring.jpa.hibernate.ddl-auto}")
+    private String ddl = "create";*/
+
     @Bean
     public void instanciaDB() {
+       // if(ddl.equals("create")){
+       // }
+        //return false;
         this.dbService.instanciaDB();
     }
-}
+    }
+
