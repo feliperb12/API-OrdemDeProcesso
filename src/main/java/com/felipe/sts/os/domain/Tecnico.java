@@ -1,5 +1,7 @@
 package com.felipe.sts.os.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.io.Serializable;
@@ -10,7 +12,7 @@ import java.util.List;
 public class Tecnico extends Pessoa implements Serializable {
     private static final long serialVersionUID = 1L;
 
-
+    @JsonIgnore
     @OneToMany(mappedBy = "tecnico")
     private List<OS> list = new ArrayList<>();
 
