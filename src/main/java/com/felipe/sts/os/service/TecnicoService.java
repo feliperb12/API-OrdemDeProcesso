@@ -6,6 +6,7 @@ import com.felipe.sts.os.dtos.TecnicosDTO;
 import com.felipe.sts.os.service.exception.DataIntegratyViolationException;
 import com.felipe.sts.os.service.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,6 +39,18 @@ public class TecnicoService {
                 objDTO.getCpf(),
                 objDTO.getTelefone()));
     }
+    public Tecnico update(Integer id, TecnicosDTO objDTO) {
+        Tecnico oldObj = findById(id);
+
+        if(findByCPF(objDTO) !=null && findByCPF(objDTO).getId() != id){
+            throw new DataIntegratyViolationException("CPF já cadastrado na base de dados!");
+        }
+        oldObj.setNome(objDTO.getNome());
+        oldObj.setCpf(objDTO.getCpf());
+        oldObj.setTelefone(objDTO.getTelefone());
+        return repository.save(oldObj);
+
+    }
     private Tecnico findByCPF(TecnicosDTO objDTO){
         Tecnico obj = repository.findByCPF(objDTO.getCpf());
         if(obj!=null){
@@ -45,4 +58,5 @@ public class TecnicoService {
         }
         return null;
     }
+
 }
