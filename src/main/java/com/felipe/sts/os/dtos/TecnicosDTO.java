@@ -3,15 +3,19 @@ package com.felipe.sts.os.dtos;
 import com.felipe.sts.os.domain.Tecnico;
 import org.hibernate.validator.constraints.br.CPF;
 
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
 public class TecnicosDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Integer id;
+    @NotEmpty(message = "O campo NOME é requerido")
     private String nome;
+    @NotEmpty(message = "O campo CPF é requerido")
     @CPF
     private String cpf;
+    @NotEmpty(message = "O campo TELEFONE é requerido")
     private String telefone;
 
     public TecnicosDTO() {
